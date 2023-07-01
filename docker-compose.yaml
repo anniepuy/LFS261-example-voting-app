@@ -7,13 +7,13 @@ networks:
 
 services:
   vote:
-    image: #DockerHub Name#/vote:latest
+    image: vote:latest
     ports:
       - 5000:80
-      depends_on:
-        - redis
-      networks:
-        - instavote
+    depends_on:
+      - redis
+    networks:
+      - instavote
   
   redis:
     image: redis:alpine
@@ -29,7 +29,7 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
   result:
-    image: #dockerhub#/result:latest
+    image: result:latest
     ports:
       - 5001:4000
     depends_on:
@@ -37,7 +37,7 @@ services:
     networks:
       - instavote
   worker:
-    image: #dockerhub#/worker:latest
+    image: worker:latest
     depends_on:
       - redis
       - db
